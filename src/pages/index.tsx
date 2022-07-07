@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import BottomNav from '../components/navigationComponents/BottomNav'
+import TopNav from '../components/navigationComponents/TopNav'
 
 const Home: NextPage = () => {
   return (
@@ -9,6 +10,7 @@ const Home: NextPage = () => {
       <Head >
         <title>Login</title>
       </Head>
+      <TopNav loggedIn={true}/>
       <h1 className="text-xl text-cyan-500 ">
         Welcome! 
       </h1>
