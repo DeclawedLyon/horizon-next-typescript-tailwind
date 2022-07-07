@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import ScheduleTimeSlot from '../../../components/ScheduleComponents/ScheduleTimeSlot';
-import { capitalizeFirstLetter } from '../../../helperFunctions';
+// import { capitalizeFirstLetter } from '../../../helperFunctions';
 
 const ScheduleWindow = () => {
   const d = new Date();
@@ -74,7 +74,7 @@ const ScheduleWindow = () => {
 
   return (
     <div className='w-full h-full min-h-screen max-h-screen flex flex-col justify-between bg-red-400'>
-      <h1 className=' max-h-min bg-black text-white '>{}'s Schedule -{d.toString().split('GMT')[0].trim()}-</h1>
+      <h1 className=' max-h-min bg-black text-white '>{}'s Schedule -{/*{d.toString().split('GMT')[0].trim()}*/}-</h1>
       <div className='flex flex-col  min-h-full bg-black flex-1'>
         {userSchedule}
       </div>
