@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import ScheduleTimeSlot from '../../../components/ScheduleComponents/ScheduleTimeSlot';
+import BottomNav from '../../../components/navigationComponents/BottomNav'
+import DropDownMenu from '../../../components/userInterfaceComponents/dropdownMenu';
 // import { capitalizeFirstLetter } from '../../../helperFunctions';
 
 const ScheduleWindow = () => {
@@ -74,7 +76,7 @@ const ScheduleWindow = () => {
 
   return (
     <div className='w-full h-full min-h-screen max-h-screen flex flex-col justify-between bg-red-400'>
-      <h1 className=' max-h-min bg-black text-white '>{}'s Schedule -{/*{d.toString().split('GMT')[0].trim()}*/}-</h1>
+      <h1 className=' max-h-min bg-black text-white '>{}'s Schedule -{/*{d.toString().split('GMT')[0].trim()}*/}- <DropDownMenu /></h1>
       <div className='flex flex-col  min-h-full bg-black flex-1'>
         {userSchedule}
       </div>
@@ -85,10 +87,9 @@ const ScheduleWindow = () => {
       <Link as={'/horizon/tara/Schedule'} href={'/[company]/[user]/Schedule'}>
         <button className='cursor-pointer m-2'>Show Tara's Schedule</button>
       </Link>
-        <Link as={'/'} href='/'>
-          <button className='cursor-pointer m-2'>Home</button>
-        </Link>
+        
       </div>
+      <BottomNav />
       {/* {hourlyElements} */}
       {/* <div>
         <button onClick={() => setSelectedDay("Monday")}>Show Monday schedule</button>
