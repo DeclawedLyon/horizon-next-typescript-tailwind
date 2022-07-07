@@ -13,10 +13,7 @@ const ScheduleWindow = () => {
   const router = useRouter();
   const companyId = router.query.company;
   const userId = router.query.userId;
-  // const capitalizeFirstLetter = (string) => {
-  //   return string.charAt(0).toUpperCase() + string.slice(1)
-  // }
-  // const capitalizedUser = currentUser ? capitalizeFirstLetter(currentUser) : ''
+  
   switch(today) {
     case 0:
       dayOfWeek = "Sunday"

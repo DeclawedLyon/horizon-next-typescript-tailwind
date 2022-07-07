@@ -3,18 +3,18 @@ import Head from 'next/head'
 import Image from 'next/image'
 import BottomNav from '../components/navigationComponents/BottomNav'
 import TopNav from '../components/navigationComponents/TopNav'
+import MainApp from './MainApp'
+import LogInApp from './LogInApp'
 
 const Home: NextPage = () => {
+  const loggedIn = true;
   return (
-    <div className="flex min-h-screen max-h-screen flex-col items-center justify-between">
+    <div>
       <Head >
-        <title>Login</title>
+        <title>Horizon Maps</title>
       </Head>
-      <TopNav loggedIn={true}/>
-      <h1 className="text-xl text-cyan-500 ">
-        Welcome! 
-      </h1>
-      <BottomNav />
+      {loggedIn && <MainApp />}
+      {loggedIn || <LogInApp />}
     </div>
   )
 }
