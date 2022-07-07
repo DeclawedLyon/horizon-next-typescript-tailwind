@@ -5,6 +5,7 @@ import ScheduleTimeSlot from '../../../components/ScheduleComponents/ScheduleTim
 import BottomNav from '../../../components/navigationComponents/BottomNav'
 import DropDownMenu from '../../../components/userInterfaceComponents/dropdownMenu';
 // import { capitalizeFirstLetter } from '../../../helperFunctions';
+import { Key } from 'react';
 
 const ScheduleWindow = () => {
   const d = new Date();
@@ -13,6 +14,7 @@ const ScheduleWindow = () => {
   const router = useRouter();
   const companyId = router.query.company;
   const userId = router.query.userId;
+  console.log(companyId, userId)
   
   switch(today) {
     case 0:
@@ -43,7 +45,7 @@ const ScheduleWindow = () => {
   //working
   const fetchUserSchedule = async () => {
     console.log(companyId, userId)
-    const response = await fetch(`../../api/${companyId}/schedule/${userId}`)
+    const response = await fetch(`../../api/${companyId}/${userId}/schedule`)
     const userSchedule = await response.json()
     console.log(userSchedule)
     // setUserSchedule(userSchedule)
@@ -51,9 +53,10 @@ const ScheduleWindow = () => {
   }
 
   const formatUserSchedule = (scheduleArr) => {
-    const scheduleElements = scheduleArr.map(scheduleObj => {
+    const scheduleElements = scheduleArr.map((scheduleObj, x) => {
       console.log(scheduleObj)
       return <ScheduleTimeSlot
+        key={x}
         nickname={scheduleObj.nickname || scheduleObj.taskId}
         startTime={scheduleObj.startTime}
         endTime={scheduleObj.endTime}
@@ -69,7 +72,7 @@ const ScheduleWindow = () => {
   // user schedule state change
   useEffect(() => {
     fetchUserSchedule().then(scheduleArr => formatUserSchedule(scheduleArr))
-  }, [userSchedule])
+  }, [])
 
   return (
     <div className='w-full h-full min-h-screen max-h-screen flex flex-col justify-between bg-red-400'>

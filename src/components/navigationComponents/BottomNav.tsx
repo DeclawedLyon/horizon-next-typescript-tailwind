@@ -10,7 +10,7 @@ const BottomNav = () => {
       <Link as={'/horizon/declan/Map'} href={'/[company]/[user]/Map'}>
         <button className="bg-sky-500 hover:bg-sky-700 px-5 py-3 text-white rounded-lg cursor-pointer">Map</button>
       </Link>
-      <Link as={'/horizon/declan/Schedule'} href={'/[company]/[user]/Schedule'}>
+      <Link as={'/1/1/Schedule'} href={'/[company]/[user]/Schedule'}>
         <button className="bg-sky-500 hover:bg-sky-700 px-5 py-3 text-white rounded-lg cursor-pointer">Schedule</button>
       </Link>
       <Link as={'/horizon/Company'} href={'/[company]/Company'}>

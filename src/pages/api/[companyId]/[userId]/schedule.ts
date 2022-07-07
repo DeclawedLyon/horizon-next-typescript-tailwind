@@ -4,8 +4,9 @@ const sqlite3 = require("sqlite3");
 const sqlite = require("sqlite");
 
 export default async function getScheduleByUserId(req: NextApiRequest, res: NextApiResponse) {
+  const userId = req.query.userId;
+  const companyId = req.query.companyId;
   try {
-    const userId = req.query.userId
 
     const openDb = async function() {
       return sqlite.open({
