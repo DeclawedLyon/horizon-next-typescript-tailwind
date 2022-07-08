@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Users (
   id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
   userName TEXT NOT NULL,
   email TEXT,
-  companyId REFERENCES Companies(id),
+  companyId INTEGER NOT NULL REFERENCES Companies(id),
   userPassword TEXT NOT NULL
 );
 
@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS Cuts (
   class TEXT NOT NULL,
   cutPeriod TEXT NOT NULL,
   cutType TEXT NOT NULL,
-  cutStatus TEXT 
+  cutStatus TEXT,
+  ownerId INTEGER NOT NULL REFERENCES Companies(id) 
 );
 
 CREATE TABLE IF NOT EXISTS Schedules (
@@ -36,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Schedules (
   taskId REFERENCES Tasks(id),
   date TEXT NOT NULL,
   status TEXT NOT NULL,
-  ownerId NOT NULL REFERENCES Users(id)
+  ownerId INTEGER NOT NULL REFERENCES Users(id)
 );
 
 CREATE TABLE IF NOT EXISTS Tasks (
@@ -50,11 +51,13 @@ CREATE TABLE IF NOT EXISTS CutCoordinates (
   lat DECIMAL NOT NULL,
   lng DECIMAL NOT NULL,
   position INTEGER NOT NULL,
-  ownerId NOT NULL REFERENCES Cuts(id)
+  ownerId INTEGER NOT NULL REFERENCES Cuts(id)
 );
 
 -- SEED DATABASE 
 INSERT INTO Companies (companyName, companyEmail, companyPassword) VALUES ('Horizon', 'horizon@test.com', '1234');
+INSERT INTO Companies (companyName, companyEmail, companyPassword) VALUES ('O-Town Cuts', 'o-towncuts@test.com', '1234');
+INSERT INTO Companies (companyName, companyEmail, companyPassword) VALUES ('Nurseries Pro', 'nurseriespro@test.com', '1234');
 INSERT INTO Users (userName, email, companyId, userPassword) VALUES ('Declan', 'test@test.com', 1, '1234');
 INSERT INTO Users (userName, email, companyId, userPassword) VALUES ('Tara', 'test2@test.ca', 1, '1234');
 INSERT INTO Users (userName, email, companyId, userPassword) VALUES ('Collin', 'test3@test.co', 1, '1234');
@@ -110,24 +113,24 @@ INSERT INTO Schedules (nickname, startTime, endTime, cutId, taskId, date, STATUS
 -- 'Mow/Trim Colville (Soccer Field)'
 -- 'Friends Clean Up'
 -- 'Friends Clean Up', 'Lock Up Tools'
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Commanders House', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Harbour Sign', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Entrance', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Parking Lot', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Park', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Baseball Field', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Entry Parking Lot', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Back Yard', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Roadside', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Commanders House', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Harbour Sign', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Entrance', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Parking Lot', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Park', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Baseball Field', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Entry Parking Lot', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Back Yard', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL);
-INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus) VALUES ('Naden Roadside', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Commanders House', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Harbour Sign', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Entrance', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Parking Lot', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Park', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Baseball Field', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Entry Parking Lot', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Back Yard', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Roadside', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Commanders House', 'July, 29, 2022', 'A', '1 Week', 'Mow', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Harbour Sign', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Entrance', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Parking Lot', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Park', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Baseball Field', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Entry Parking Lot', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Back Yard', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL, 1);
+INSERT INTO Cuts (locationName, lastCut, class, cutPeriod, cutType, cutStatus, ownerId) VALUES ('Naden Roadside', 'July, 29, 2022', 'A', '1 Week', 'Trim', NULL, 1);
 -- INSERT INTO CutCoordinates () VALUES ();
 
 -- Down

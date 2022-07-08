@@ -26,14 +26,4 @@ export default function getUsers(req: NextApiRequest, res: NextApiResponse) {
   catch {
 
   }
-  res.send([
-    {
-      id: 1,
-      userName: 'Declan'
-    },
-    {
-      id: 2,
-      userName: 'Tara'
-    }
-    ])
 }
