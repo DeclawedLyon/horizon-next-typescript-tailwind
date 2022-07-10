@@ -3,9 +3,10 @@
 -- CREATE TABLES 
 
 CREATE TABLE IF NOT EXISTS Users (
-  id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   userName TEXT NOT NULL,
-  email TEXT,
+  email CHARACTER NOT NULL UNIQUE,
+  phone TEXT NOT NULL UNIQUE,
   companyId INTEGER NOT NULL REFERENCES Companies(id),
   userPassword TEXT NOT NULL
 );
@@ -13,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Users (
 CREATE TABLE IF NOT EXISTS Companies (
   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   companyName TEXT NOT NULL,
-  companyEmail TEXT NOT NULL,
+  companyEmail TEXT NOT NULL UNIQUE,
   companyPassword TEXT NOT NULL
 );
 
@@ -58,12 +59,12 @@ CREATE TABLE IF NOT EXISTS CutCoordinates (
 INSERT INTO Companies (companyName, companyEmail, companyPassword) VALUES ('Horizon', 'horizon@test.com', '1234');
 INSERT INTO Companies (companyName, companyEmail, companyPassword) VALUES ('O-Town Cuts', 'o-towncuts@test.com', '1234');
 INSERT INTO Companies (companyName, companyEmail, companyPassword) VALUES ('Nurseries Pro', 'nurseriespro@test.com', '1234');
-INSERT INTO Users (userName, email, companyId, userPassword) VALUES ('Declan', 'test@test.com', 1, '1234');
-INSERT INTO Users (userName, email, companyId, userPassword) VALUES ('Tara', 'test2@test.ca', 1, '1234');
-INSERT INTO Users (userName, email, companyId, userPassword) VALUES ('Collin', 'test3@test.co', 1, '1234');
-INSERT INTO Users (userName, email, companyId, userPassword) VALUES ('Jason', 'test4@test.org', 1, '1234');
-INSERT INTO Users (userName, email, companyId, userPassword) VALUES ('Kate', 'test5@test.io', 1, '1234');
-INSERT INTO Users (userName, email, companyId, userPassword) VALUES ('Balthazar', 'testX@test.io', 2, '1234');
+INSERT INTO Users (userName, email, phone, companyId, userPassword) VALUES ('Declan', "test@test.com", '4033059248', 1, '1234');
+INSERT INTO Users (userName, email, phone, companyId, userPassword) VALUES ('Tara', 'test2@test.ca', '3920144839', 1, '1234');
+INSERT INTO Users (userName, email, phone, companyId, userPassword) VALUES ('Collin', 'test3@test.co', '3920284839', 1, '1234');
+INSERT INTO Users (userName, email, phone, companyId, userPassword) VALUES ('Jason', 'test4@test.org', '3920185839', 1, '1234');
+INSERT INTO Users (userName, email, phone, companyId, userPassword) VALUES ('Kate', 'test5@test.io', '3927184839', 1, '1234');
+INSERT INTO Users (userName, email, phone, companyId, userPassword) VALUES ('Balthazar', 'testX@test.io', '8493846058' ,2, '1234');
 
 INSERT INTO Schedules (nickname, startTime, endTime, cutId, taskId, date, STATUS, ownerId) VALUES ('Commanders House', '0700', '0800', '1', '', 'July, 19, 2022', 'INCOMPLETE', '1');
 INSERT INTO Schedules (nickname, startTime, endTime, cutId, taskId, date, STATUS, ownerId) VALUES ('Harbour Sign', '0800', '0900', '2', '', 'July, 19, 2022', 'INCOMPLETE', '1');
