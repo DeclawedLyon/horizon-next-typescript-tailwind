@@ -8,8 +8,11 @@ const Login = () => {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
 
-  const testLogin = (username: string, password: string) => {
+  const testLogin = async (username: string, password: string) => {
     console.log(username, password)
+    const loginResult = await fetch(`../../pages/api/1/test@test.com/getemployeebyemail`)
+    const test = await fetch('../../pages/api/1/getemployees')
+    console.log('test', test)
   }
   const submitButton = (
     <button
@@ -20,12 +23,13 @@ const Login = () => {
         const pass = password.trim();
         if (user !== '' && pass !== '') {
           const loginTest = testLogin(user, pass);
+
         }
       }}
     >Submit</button>
   )
   useEffect(() => {
-    console.log('test', userName, password)
+    // console.log('test', userName, password)
   }, [userName, password])
   return (
     <div className=' h-1/3 border-2 border-black p-4 relative'>

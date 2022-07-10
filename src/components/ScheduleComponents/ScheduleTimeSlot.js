@@ -27,11 +27,16 @@ const ScheduleTimeSlot = (props) => {
   //   formatDetailsElement(props.plan)
   // }, [props.plan])
   return (
-    <div className='min-w-auto h-full m-1 bg-cyan-500 flex-1' key={`plan:${props.startTime}-${props.endTime}`}>
-      <div className='schedule-time-selection'>
-        {props.startTime} - {props.endTime}
+    <div className='flex min-w-auto h-full m-1 bg-cyan-300 flex-1 justify-between' key={`plan:${props.startTime}-${props.endTime}`}>
+      <div className='flex flex-col w-20 h-auto px-2 max-h-full justify-center items-center border-r-2 border-black'>
+        <div>
+          {props.startTime}
+        </div>
+        <div>
+          {props.endTime}
+        </div>
       </div>
-      <div className='schedule-details'>
+      <div className='flex w-full justify-center items-center'>
         {props.nickname}
         {props.description}
       </div>
