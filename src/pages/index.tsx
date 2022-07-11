@@ -13,8 +13,8 @@ const Home: NextPage = () => {
       <Head >
         <title>Horizon Maps</title>
       </Head>
-      {loggedIn && <MainApp />}
-      {loggedIn || <LogInApp />}
+      {loggedIn && <MainApp loggedIn={loggedIn}/>}
+      {loggedIn || <LogInApp loggedIn={loggedIn}/>}
     </div>
   )
 }
