@@ -52,9 +52,26 @@ const ScheduleWindow = () => {
     return userSchedule
   }
 
+  const formatTime = (time, formatType) => {
+    if (formatType === '12hr') {
+      let zeroIndex = time.toString().indexOf('0')
+      let timeArr = time.toString().split('');
+      timeArr.splice(zeroIndex, 0, ':')
+      let newTime = timeArr.join('')
+      console.log(newTime)
+    }
+    if (formatType === '24hr') {
+
+    }
+  }
+
   const formatUserSchedule = (scheduleArr) => {
     const scheduleElements = scheduleArr.map((scheduleObj, x) => {
-      console.log(scheduleObj)
+      // console.log(scheduleObj)
+      const formattedStartTime = formatTime(scheduleObj.startTime, '12hr')
+      const secondaryStartTime = formatTime(scheduleObj.startTime, '24hr')
+      console.log(formattedStartTime)
+      // const formattedEndTime = 
       return <ScheduleTimeSlot
         key={x}
         nickname={scheduleObj.nickname || scheduleObj.taskId}
@@ -92,6 +109,8 @@ const ScheduleWindow = () => {
         <Link as={'/1/2/Schedule'} href={'/[company]/[user]/Schedule'}>
           <button className='cursor-pointer m-2'>Show Tara's Schedule</button>
         </Link>
+        <button >Fetch Declan</button>
+        <button >Fetch Tara</button>
       </div>
       <BottomNav />
       {/* {hourlyElements} */}

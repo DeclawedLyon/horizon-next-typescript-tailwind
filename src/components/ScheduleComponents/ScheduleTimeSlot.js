@@ -33,6 +33,9 @@ const ScheduleTimeSlot = (props) => {
           {props.startTime}
         </div>
         <div>
+
+        </div>
+        <div>
           {props.endTime}
         </div>
       </div>
