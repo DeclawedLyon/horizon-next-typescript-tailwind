@@ -43,13 +43,19 @@ const ScheduleWindow = () => {
   // const []
 
   //working
-  const fetchUserSchedule = async () => {
-    console.log(companyId, userId)
-    const response = await fetch(`../../api/${companyId}/${userId}/schedule`)
-    const userSchedule = await response.json()
-    console.log(userSchedule)
-    // setUserSchedule(userSchedule)
-    return userSchedule
+  const fetchUserSchedule = async (id1, id2) => {
+    if (id1 && id2) {
+      const response = await fetch(`../../api/${id1}/${id2}/schedule`)
+      const userSchedule = await response.json()
+      return userSchedule
+    } else {
+      // console.log(companyId, userId)
+      const response = await fetch(`../../api/${companyId}/${userId}/schedule`)
+      const userSchedule = await response.json()
+      // console.log(userSchedule)
+      // setUserSchedule(userSchedule)
+      return userSchedule
+    }
   }
 
   const formatTime = (time, formatType) => {
@@ -89,7 +95,7 @@ const ScheduleWindow = () => {
   // user schedule state change
   useEffect(() => {
     fetchUserSchedule().then(scheduleArr => formatUserSchedule(scheduleArr))
-  }, [])
+  }, [companyId, userId])
 
   return (
     <div className='w-full h-full min-h-screen max-h-screen flex flex-col justify-between bg-red-400'>
@@ -102,16 +108,16 @@ const ScheduleWindow = () => {
       <div className='flex flex-col  min-h-full bg-black flex-1'>
         {userSchedule}
       </div>
-      <div className='bg-slate-500'>
+      {/* <div className='bg-slate-500'>
         <Link as={'/1/1/Schedule'} href={'/[company]/[user]/Schedule'}>
           <button className='cursor-pointer m-2'>Show Declan's Schedule</button>
         </Link>
         <Link as={'/1/2/Schedule'} href={'/[company]/[user]/Schedule'}>
           <button className='cursor-pointer m-2'>Show Tara's Schedule</button>
         </Link>
-        <button >Fetch Declan</button>
-        <button >Fetch Tara</button>
-      </div>
+        <button onClick={() => fetchUserSchedule('1', '1').then(arr => formatUserSchedule(arr))}>Fetch Declan</button>
+        <button onClick={() => fetchUserSchedule('1', '2').then(arr => formatUserSchedule(arr))}>Fetch Tara</button>
+      </div> */}
       <BottomNav />
       {/* {hourlyElements} */}
       {/* <div>
