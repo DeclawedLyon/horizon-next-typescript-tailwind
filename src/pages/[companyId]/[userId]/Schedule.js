@@ -5,7 +5,7 @@ import ScheduleTimeSlot from '../../../components/scheduleComponents/ScheduleTim
 import BottomNav from '../../../components/navigationComponents/BottomNav'
 import DropDownMenu from '../../../components/userInterfaceComponents/dropdownMenu';
 // import { capitalizeFirstLetter } from '../../../helperFunctions';
-import flowBite from '../../../../node_modules/flowbite/dist/flowbite'
+// import flowBite from '../../../../node_modules/flowbite/dist/flowbite'
 import { Key } from 'react';
 import Script from 'next/script';
 
@@ -80,7 +80,7 @@ const ScheduleWindow = () => {
         startTime={formatTime(scheduleObj.startTime, '12hr')}
         endTime={formatTime(scheduleObj.endTime, '12hr')}
         date={scheduleObj.date}
-        description={scheduleObj.taskDescription ? scheduleObj.taskDescription : null}
+        description={x > 5 || scheduleObj.taskDescription ? scheduleObj.taskDescription : 'words go here'}
       />
     })
     setUserSchedule(scheduleElements);
@@ -95,7 +95,7 @@ const ScheduleWindow = () => {
       <h1 className='flex flex-row justify-between max-h-min bg-black text-white text-xl font-semibold'>
         - Today's Schedule -{/*{d.toString().split('GMT')[0].trim()}*/}
         <div className='border border-red-500 h-20 w-20 bg-white'>
-          <script src={'../../../../node_modules/flowbite/dist/flowbite'}></script>
+          {/* <script src={'../../../../node_modules/flowbite/dist/flowbite'}></script> */}
         </div>
         <DropDownMenu 
           optionTitle={'Select Date'}

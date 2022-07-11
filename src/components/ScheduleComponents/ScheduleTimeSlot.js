@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 const ScheduleTimeSlot = (props) => {
+  const [selected, setSelected] = useState(false)
   // const [details, setDetails] = useState()
   // const formatDetailsElement = (planArr) => {
   //   let formattedPlans = []
@@ -27,7 +28,7 @@ const ScheduleTimeSlot = (props) => {
   //   formatDetailsElement(props.plan)
   // }, [props.plan])
   return (
-    <div className='flex min-w-auto h-full m-1 bg-cyan-300 flex-1 justify-between' key={`plan:${props.startTime}-${props.endTime}`}>
+    <div onClick={() => selected ? setSelected(false) : setSelected(true)} className={`flex min-w-auto h-full m-1  ${selected ? 'bg-sky-500' : 'bg-cyan-300'} flex-1 justify-between cursor-pointer`} key={`plan:${props.startTime}-${props.endTime}`}>
       <div className='flex flex-col w-20 h-auto px-2 max-h-full justify-center items-center border-r-2 border-black'>
         <div>
           {props.startTime}
@@ -41,7 +42,7 @@ const ScheduleTimeSlot = (props) => {
       </div>
       <div className='flex w-full justify-center items-center'>
         {props.nickname}
-        {props.description}
+        {selected && props.description}
       </div>
     </div>
   )
