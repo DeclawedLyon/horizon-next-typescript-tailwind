@@ -7,7 +7,7 @@ import MainApp from './MainApp'
 import LogInApp from './LogInApp'
 
 const Home: NextPage = () => {
-  const loggedIn = false;
+  const loggedIn = true;
   return (
     <div>
       <Head >

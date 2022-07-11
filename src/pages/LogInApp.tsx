@@ -12,7 +12,7 @@ const LogInApp = ({loggedIn}: LoginAppProps) => {
     <div className="flex min-h-screen max-h-screen flex-col items-center justify-between">
       <TopNav loggedIn={loggedIn} />
       <Login />
-      <BottomNav show={loggedIn}/>
+      <BottomNav show={loggedIn} home={true} admin={false}/>
     </div>
   )
 }
