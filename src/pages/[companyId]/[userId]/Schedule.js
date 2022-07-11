@@ -5,7 +5,9 @@ import ScheduleTimeSlot from '../../../components/scheduleComponents/ScheduleTim
 import BottomNav from '../../../components/navigationComponents/BottomNav'
 import DropDownMenu from '../../../components/userInterfaceComponents/dropdownMenu';
 // import { capitalizeFirstLetter } from '../../../helperFunctions';
+import flowBite from '../../../../node_modules/flowbite/dist/flowbite'
 import { Key } from 'react';
+import Script from 'next/script';
 
 const ScheduleWindow = () => {
   const d = new Date();
@@ -14,7 +16,6 @@ const ScheduleWindow = () => {
   const router = useRouter();
   const companyId = router.query.company;
   const userId = router.query.userId;
-  console.log(companyId, userId)
   
   switch(today) {
     case 0:
@@ -40,31 +41,31 @@ const ScheduleWindow = () => {
       break;
   }
   const [userSchedule, setUserSchedule] = useState([])
-  // const []
 
-  //working
   const fetchUserSchedule = async (id1, id2) => {
     if (id1 && id2) {
       const response = await fetch(`../../api/${id1}/${id2}/schedule`)
       const userSchedule = await response.json()
       return userSchedule
     } else {
-      // console.log(companyId, userId)
       const response = await fetch(`../../api/${companyId}/${userId}/schedule`)
       const userSchedule = await response.json()
-      // console.log(userSchedule)
-      // setUserSchedule(userSchedule)
       return userSchedule
     }
   }
 
   const formatTime = (time, formatType) => {
     if (formatType === '12hr') {
-      let zeroIndex = time.toString().indexOf('0')
-      let timeArr = time.toString().split('');
-      timeArr.splice(zeroIndex, 0, ':')
-      let newTime = timeArr.join('')
-      console.log(newTime)
+      if (time < 1000) {
+        let splitTime = time.toString().split('')
+        splitTime.splice(1, 0, ':')
+        return splitTime.join('')
+      }
+      else {
+        let splitTime = time.toString().split('')
+        splitTime.splice(2, 0, ':')
+        return splitTime.join('')
+      }
     }
     if (formatType === '24hr') {
 
@@ -73,63 +74,43 @@ const ScheduleWindow = () => {
 
   const formatUserSchedule = (scheduleArr) => {
     const scheduleElements = scheduleArr.map((scheduleObj, x) => {
-      // console.log(scheduleObj)
-      const formattedStartTime = formatTime(scheduleObj.startTime, '12hr')
-      const secondaryStartTime = formatTime(scheduleObj.startTime, '24hr')
-      console.log(formattedStartTime)
-      // const formattedEndTime = 
       return <ScheduleTimeSlot
         key={x}
         nickname={scheduleObj.nickname || scheduleObj.taskId}
-        startTime={scheduleObj.startTime}
-        endTime={scheduleObj.endTime}
+        startTime={formatTime(scheduleObj.startTime, '12hr')}
+        endTime={formatTime(scheduleObj.endTime, '12hr')}
         date={scheduleObj.date}
         description={scheduleObj.taskDescription ? scheduleObj.taskDescription : null}
       />
     })
     setUserSchedule(scheduleElements);
-    // console.log('test', scheduleArr)
   }
-  
-  // memory leak in useEffect due to re-render after 
-  // user schedule state change
+
   useEffect(() => {
     fetchUserSchedule().then(scheduleArr => formatUserSchedule(scheduleArr))
   }, [companyId, userId])
 
   return (
     <div className='w-full h-full min-h-screen max-h-screen flex flex-col justify-between bg-red-400'>
-      <h1 className=' max-h-min bg-black text-white text-xl font-semibold'>
+      <h1 className='flex flex-row justify-between max-h-min bg-black text-white text-xl font-semibold'>
         - Today's Schedule -{/*{d.toString().split('GMT')[0].trim()}*/}
+        <div className='border border-red-500 h-20 w-20 bg-white'>
+          <script src={'../../../../node_modules/flowbite/dist/flowbite'}></script>
+        </div>
         <DropDownMenu 
           optionTitle={'Select Date'}
         />
+        {/* find out how to appropriately load calendar script */}
+        {/* <Script src={flowBite} strategy='lazyOnload' /> */}
       </h1>
       <div className='flex flex-col  min-h-full bg-black flex-1'>
         {userSchedule}
       </div>
-      {/* <div className='bg-slate-500'>
-        <Link as={'/1/1/Schedule'} href={'/[company]/[user]/Schedule'}>
-          <button className='cursor-pointer m-2'>Show Declan's Schedule</button>
-        </Link>
-        <Link as={'/1/2/Schedule'} href={'/[company]/[user]/Schedule'}>
-          <button className='cursor-pointer m-2'>Show Tara's Schedule</button>
-        </Link>
-        <button onClick={() => fetchUserSchedule('1', '1').then(arr => formatUserSchedule(arr))}>Fetch Declan</button>
-        <button onClick={() => fetchUserSchedule('1', '2').then(arr => formatUserSchedule(arr))}>Fetch Tara</button>
-      </div> */}
       <BottomNav />
-      {/* {hourlyElements} */}
-      {/* <div>
-        <button onClick={() => setSelectedDay("Monday")}>Show Monday schedule</button>
-        <button onClick={() => setSelectedDay("Tuesday")}>Show Tuesday schedule</button>
-        <button onClick={() => setSelectedDay("Wednesday")}>Show Wednesday schedule</button>
-        <button onClick={() => setSelectedDay("Thursday")}>Show Thursday schedule</button>
-        <button onClick={() => setSelectedDay("Friday")}>Show Friday schedule</button>
-      </div> */}
     </div>
   )
 }
+{/* <script src="../path/to/flowbite/dist/flowbite.js"></script> */}
 
 export default ScheduleWindow
 
