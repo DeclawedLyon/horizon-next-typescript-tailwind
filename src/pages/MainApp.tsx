@@ -10,7 +10,7 @@ const MainApp = ({loggedIn}: MainAppProps) => {
     <div className="flex min-h-screen max-h-screen flex-col items-center justify-between">
       <TopNav loggedIn={loggedIn}/>
       <h1 className='text-sky-500 text-4xl'>Welcome</h1>
-      <BottomNav show={loggedIn}/>
+      <BottomNav show={loggedIn} home={true} admin={false}/>
     </div>
   )
 }

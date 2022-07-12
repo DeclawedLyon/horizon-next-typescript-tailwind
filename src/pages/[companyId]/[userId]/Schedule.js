@@ -106,7 +106,7 @@ const ScheduleWindow = () => {
       <div className='flex flex-col  min-h-full bg-black flex-1'>
         {userSchedule}
       </div>
-      <BottomNav />
+      <BottomNav show={true} home={false} admin={false}/>
     </div>
   )
 }
