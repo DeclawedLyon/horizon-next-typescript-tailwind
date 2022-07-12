@@ -99,6 +99,7 @@ const ScheduleWindow = () => {
         </div>
         <DropDownMenu 
           optionTitle={'Select Date'}
+          menuItems={['test-1', 'test-2']}
         />
         {/* find out how to appropriately load calendar script */}
         {/* <Script src={flowBite} strategy='lazyOnload' /> */}

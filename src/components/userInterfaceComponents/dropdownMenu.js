@@ -1,12 +1,35 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon, MenuIcon } from '@heroicons/react/solid'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function DropDownMenu() {
+export default function DropDownMenu(props) {
+  const [menuItems, setMenuItems] = useState()
+  
+  useEffect(() => {
+    const menuList = props.menuItems.map(item => {
+      console.log(item)
+      return (
+        <Menu.Item>
+          {({ active }) => (
+            <a
+              href="#"
+              className={classNames(
+                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                'block px-4 py-2 text-sm'
+              )}
+            >
+              {item}
+            </a>
+          )}
+        </Menu.Item>
+      )
+    })
+    setMenuItems(menuList)
+  }, props.menuItems)
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -27,7 +50,8 @@ export default function DropDownMenu() {
       >
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
+            {menuItems}
+            {/* <Menu.Item>
               {({ active }) => (
                 <a
                   href="#"
@@ -65,8 +89,8 @@ export default function DropDownMenu() {
                   License
                 </a>
               )}
-            </Menu.Item>
-            <form method="POST" action="#">
+            </Menu.Item> */}
+            {/* <form method="POST" action="#">
               <Menu.Item>
                 {({ active }) => (
                   <button
@@ -80,7 +104,7 @@ export default function DropDownMenu() {
                   </button>
                 )}
               </Menu.Item>
-            </form>
+            </form> */}
           </div>
         </Menu.Items>
       </Transition>
