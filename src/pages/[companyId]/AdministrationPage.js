@@ -7,24 +7,33 @@ const admin = () => {
   const router = useRouter([]);
   const company = router.query.companyId
   const [employees, setEmployees] = useState()
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState()
   const [dropdownElement, setDropdownElement] = useState(<DropDownMenu menuItems={[]}/>)
 
+  const getEmployeeScheduleById = async (userId) => {
+    console.log('userid', userId)
+    setSelectedEmployeeId('')
+    const response = await fetch(`../api/${company}/${userId}/schedule`)
+    const employeeSchedule = await response.json()
+    console.log(employeeSchedule)
+    setSelectedEmployeeId(employeeSchedule)
+    return employeeSchedule
+  }
   const getEmployeesByCompany = async (companyId) => {
     let response = await fetch(`../api/${companyId}/getemployees`)
     let employees = await response.json()
     setEmployees(employees)
     return employees
   }
-  const showEmployeeElements = () => {
 
-  }
   useEffect(() => {
     if (company) getEmployeesByCompany(company)
-      .then(employeesArr => setDropdownElement(<DropDownMenu menuList={employeesArr.map(item => {
+      .then(employeesArr => setDropdownElement(<DropDownMenu getSchedule={(id) => {getEmployeeScheduleById(id)}} menuList={employeesArr.map(item => {
         console.log(item)
         return item})}/>))
+        console.log(selectedEmployeeId)
     // getEmployeesByCompany(company)
-  }, [company])
+  }, [company, selectedEmployeeId])
   return (
     <div className='h-screen flex flex-col justify-between items-center '>
       <h1>Admin Page</h1>
@@ -37,6 +46,7 @@ const admin = () => {
           )
         }) : ''}</ul>
       </div>
+      <div>{selectedEmployeeId ? selectedEmployeeId.map(e => e.nickname) : ''}</div>
       <EditSchedule />
     </div>
   )
