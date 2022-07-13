@@ -16,7 +16,7 @@ const administratorPage = (req: NextApiRequest, res: NextApiResponse) => {
     const getAllSchedulesByCompanyId = async (company: number) => {
       let test = company;
       const db = await openDb()
-      const employeeSchedules = await db.all(`SELECT a.*, b.* FROM Users 
+      const employeeSchedules = await db.all(`SELECT a.id, a.userName, b.* FROM Users 
       as a LEFT JOIN Schedules as b
       ON a.id = b.ownerId
       WHERE a.companyId = ${company}
