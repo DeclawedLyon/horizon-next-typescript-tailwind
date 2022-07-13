@@ -8,28 +8,31 @@ function classNames(...classes) {
 
 export default function DropDownMenu(props) {
   const [menuItems, setMenuItems] = useState()
+  console.log(props)
   
   useEffect(() => {
-    const menuList = props.menuItems.map(item => {
-      console.log(item)
-      return (
-        <Menu.Item>
-          {({ active }) => (
-            <a
-              href="#"
-              className={classNames(
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'block px-4 py-2 text-sm'
-              )}
-            >
-              {item}
-            </a>
-          )}
-        </Menu.Item>
-      )
-    })
-    setMenuItems(menuList)
-  }, props.menuItems)
+    if (props.menuList) {
+      const menuList = props.menuList.map(item => {
+        console.log('test', item)
+        return (
+          <Menu.Item key={item.id}>
+            {({ active }) => (
+              <a
+                href="#"
+                className={classNames(
+                  active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                  'block px-4 py-2 text-sm'
+                )}
+              >
+                {item.id}{item.userName}
+              </a> 
+            )}
+          </Menu.Item>
+        )
+      })
+      setMenuItems(menuList)
+    }
+  }, [props.menuList])
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
