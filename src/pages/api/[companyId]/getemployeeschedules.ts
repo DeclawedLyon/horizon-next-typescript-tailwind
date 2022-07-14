@@ -14,7 +14,6 @@ const administratorPage = (req: NextApiRequest, res: NextApiResponse) => {
       });
     }
     const getAllSchedulesByCompanyId = async (company: number) => {
-      let test = company;
       const db = await openDb()
       const employeeSchedules = await db.all(`SELECT a.id, a.userName, b.* FROM Users 
       as a LEFT JOIN Schedules as b
@@ -28,7 +27,7 @@ const administratorPage = (req: NextApiRequest, res: NextApiResponse) => {
   catch(err) {
     // if (err && err.error === 'SQLITE_CANTOPEN') {
       // Handle your error here
-      res.send(err)
+    res.send(err)
   }
 }
 
