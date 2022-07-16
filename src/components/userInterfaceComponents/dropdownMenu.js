@@ -21,7 +21,7 @@ export default function DropDownMenu(props) {
               <a
                 onClick={() => {
                   setSelectedUser(item.userName)
-                  props.getSchedule(1)
+                  props.getSchedule(userId)
                 }}
                 href="#"
                 className={classNames(
@@ -37,7 +37,7 @@ export default function DropDownMenu(props) {
       })
       setMenuItems(menuList)
     }
-  }, [props.menuList])
+  }, [props, props.menuList])
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>

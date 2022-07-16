@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import EditSchedule from '../../components/adminComponents/editSchedule';
@@ -6,6 +7,7 @@ import BottomNav from '../../components/navigationComponents/BottomNav'
 import { getEmployeeScheduleById, getEmployeesByCompany } from '../../helperFunctions/apiHelpers';
 
 const admin = () => {
+
   const router = useRouter([]);
   const company = router.query.companyId
   const [employees, setEmployees] = useState()
@@ -43,7 +45,7 @@ const admin = () => {
       <button onClick={() => fetchEmployeeData()}>GET</button>
       {/* <DropDownMenu menuItems={employees ? employees.map(e => e.name) : []}/> */}
       {dropdownElement}
-      <div className='border border-red-500 w-full relative'>
+      {/* <div className='border border-red-500 w-full relative'>
         <ul className='flex flex-col px-60 relative border-4 border-green-500 max-w-fit'>{employees ? employees.map((e, x) => {
           return (
             <li className='border border-black text-center max-w-content py-5 px-10 m-2 float-left' key={x}>{e.userName}</li>
@@ -51,7 +53,7 @@ const admin = () => {
           }) : ''}</ul>
 
           <div>{selectedEmployeeId ? selectedEmployeeId.map(e => e.nickname) : ''}</div>
-      </div>
+      </div> */}
       <EditSchedule />
       <BottomNav show={true} home={false} admin={false}/>
     </div>
