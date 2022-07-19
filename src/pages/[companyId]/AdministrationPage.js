@@ -4,7 +4,8 @@ import { useRouter } from 'next/router'
 import EditSchedule from '../../components/adminComponents/editSchedule';
 import DropDownMenu from '../../components/userInterfaceComponents/dropdownMenu';
 import BottomNav from '../../components/navigationComponents/BottomNav'
-import { getEmployeeScheduleById, getEmployeesByCompany } from '../../helperFunctions/apiHelpers';
+import AdminWindow from '../../components/adminComponents/AdminWindow';
+// import { getEmployeeScheduleById, getEmployeesByCompany } from '../../helperFunctions/apiHelpers';
 
 const admin = () => {
 
@@ -14,30 +15,31 @@ const admin = () => {
   const [selectedEmployeeId, setSelectedEmployeeId] = useState()
   const [dropdownElement, setDropdownElement] = useState(<DropDownMenu menuItems={[]}/>)
 
-  // const getEmployeeScheduleById = async (userId) => {
-  //   setSelectedEmployeeId('')
-  //   let response = await fetch(`../api/${company}/${userId}/schedule`)
-  //   let employeeSchedule = await response.json()
-  //   setSelectedEmployeeId(employeeSchedule)
-  //   return employeeSchedule
-  // }
+  const getEmployeeScheduleById = async (userId) => {
+    setSelectedEmployeeId('')
+    let response = await fetch(`../api/${company}/${userId}/schedule`)
+    let employeeSchedule = await response.json()
+    setSelectedEmployeeId(employeeSchedule)
+    return employeeSchedule
+  }
   const fetchEmployeeData = async () => {
     const employees = await getEmployeesByCompany(company)
     console.log(employees)
     setEmployees(employees)
   }
-  // const getEmployeesByCompany = async (companyId) => {
-  //   let response = await fetch(`../api/${companyId}/getemployees`)
-  //   let employees = await response.json()
-  //   setEmployees(employees)
-  //   return employees
-  // }
+  const getEmployeesByCompany = async (companyId) => {
+    let response = await fetch(`../api/${companyId}/getemployees`)
+    let employees = await response.json()
+    setEmployees(employees)
+    return employees
+  }
 
   useEffect(() => {
-    // if (company) getEmployeesByCompany(company)
-    //   .then(employeesArr => setDropdownElement(<DropDownMenu getSchedule={(id) => {getEmployeeScheduleById(id)}} menuList={employeesArr.map(item => {
-    //     return item
-    //   })}/>))
+    if (company) getEmployeesByCompany(company)
+      .then(employeesArr => setDropdownElement(
+        <DropDownMenu getSchedule={(id) => {getEmployeeScheduleById(id)}} menuList={employeesArr.map(item => {
+        return item
+      })}/>))
   }, [company, selectedEmployeeId])
   return (
     <div className='h-screen flex flex-col justify-between items-center '>
@@ -45,6 +47,7 @@ const admin = () => {
       <button onClick={() => fetchEmployeeData()}>GET</button>
       {/* <DropDownMenu menuItems={employees ? employees.map(e => e.name) : []}/> */}
       {dropdownElement}
+      <AdminWindow />
       {/* <div className='border border-red-500 w-full relative'>
         <ul className='flex flex-col px-60 relative border-4 border-green-500 max-w-fit'>{employees ? employees.map((e, x) => {
           return (
