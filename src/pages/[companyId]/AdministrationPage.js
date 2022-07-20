@@ -46,7 +46,13 @@ const admin = () => {
       <h1>Admin Page</h1>
       <button onClick={() => fetchEmployeeData()}>GET</button>
       {/* <DropDownMenu menuItems={employees ? employees.map(e => e.name) : []}/> */}
-      {dropdownElement}
+      <select placeholder='select employee'>
+        <option>Test1</option>
+        <option>Test2</option>
+        <option>Test3</option>
+        <option>Test4</option>
+      </select>
+      {/* {dropdownElement} */}
       <AdminWindow />
       {/* <div className='border border-red-500 w-full relative'>
         <ul className='flex flex-col px-60 relative border-4 border-green-500 max-w-fit'>{employees ? employees.map((e, x) => {
