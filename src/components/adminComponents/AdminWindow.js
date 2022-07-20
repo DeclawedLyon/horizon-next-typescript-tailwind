@@ -1,6 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee, faClipboardList, faCalendarPlus, faMapLocationDot, faUsers } from '@fortawesome/free-solid-svg-icons'
+import AdminPageSelection from './AdminPageSelection'
 
 const element = <FontAwesomeIcon icon={faCoffee} />
 const element2 = <FontAwesomeIcon icon={faCoffee} />
@@ -11,30 +12,17 @@ const AdminWindow = () => {
       {/* row 1 */}
       <div className='h-auto w-full flex flex-1 gap-4  flex-grow ' >
         {/* box 1 */}
-        <div className='w-auto border border-black h-full flex-grow flex flex-col items-center justify-center'>
-          <div className='self-center flex-grow flex items-center justify-center'>
-            <p className='mt-10 text-6xl'><FontAwesomeIcon icon={faClipboardList} /></p>
-          </div>
-          <h2 className='self-center mb-8'>Update Schedules</h2>
-        </div>
+        <AdminPageSelection icon={<FontAwesomeIcon icon={faClipboardList}/>} selectionName={'Update Schedules'}/>
         {/* box 2 */}
-        <div className='w-auto border border-black h-full flex-grow'>
-            <FontAwesomeIcon icon={faCalendarPlus} />
-            <h2 className=''>Add Task</h2>
-          </div>
-        </div>
+        <AdminPageSelection icon={<FontAwesomeIcon icon={faCalendarPlus}/>} selectionName={'Add Task'}/>
+      </div>
+      
         {/* row 2 */}
-        <div className='h-auto w-full flex flex-1 gap-4  flex-grow ' >
-          {/* box 3 */}
-          <div className='w-auto border border-black h-full flex-grow'>
-            <FontAwesomeIcon icon={faMapLocationDot} />
-            <h2 className=''>Add Map Location</h2>
-          </div>
-          <div className='w-auto border border-black h-full flex-grow'>
-            <FontAwesomeIcon icon={faUsers}/>
-            <h2 className=''>Manage Employees</h2>
-          </div>
-        
+      <div className='h-auto w-full flex flex-1 gap-4  flex-grow ' >
+        {/* box 3 */}
+        <AdminPageSelection icon={<FontAwesomeIcon icon={faMapLocationDot}/>} selectionName={'Add Map Location'}/>
+        {/* box 4 */}
+        <AdminPageSelection icon={<FontAwesomeIcon icon={faUsers}/>} selectionName={'Manage Employees'}/>   
       </div>
     </div>
   )
