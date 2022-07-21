@@ -8,7 +8,7 @@ export interface BottomNavProps {
 }
 const BottomNav = ({show, home, admin}: BottomNavProps) => {
   return (
-    <>
+    <div className='absolute bottom-0 w-full'>
       {show || <div className='w-full sticky bottom-0 h-11 bg-sky-500'></div>}
       {show && <div className="flex flex-row justify-center bottom-0 w-full ">
         {home || <Link as={'/'} href='/'>
@@ -30,7 +30,7 @@ const BottomNav = ({show, home, admin}: BottomNavProps) => {
           <button className="bg-sky-500 hover:bg-sky-700 px-5 py-3 text-white rounded-lg cursor-pointer">Admin Page</button>
         </Link>}
       </div>}
-    </>
+    </div>
   )
 }
 

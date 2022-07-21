@@ -5,6 +5,8 @@ import EditSchedule from '../../components/adminComponents/editSchedule';
 import DropDownMenu from '../../components/userInterfaceComponents/dropdownMenu';
 import BottomNav from '../../components/navigationComponents/BottomNav'
 import AdminWindow from '../../components/adminComponents/AdminWindow';
+import AppComponentWindow from '../../components/appComponents/AppComponentWindow';
+import TopNav from '../../components/navigationComponents/TopNav';
 // import { getEmployeeScheduleById, getEmployeesByCompany } from '../../helperFunctions/apiHelpers';
 
 const admin = () => {
@@ -42,32 +44,12 @@ const admin = () => {
       })}/>))
   }, [company, selectedEmployeeId])
   return (
-    <div className='h-screen flex flex-col justify-between items-center '>
-      <h1>Admin Page</h1>
-      <button onClick={() => fetchEmployeeData()}>GET</button>
-      {/* <DropDownMenu menuItems={employees ? employees.map(e => e.name) : []}/> */}
-      <div>
-        <select placeholder='select employee'>
-          <option>Test1</option>
-          <option>Test2</option>
-          <option>Test3</option>
-          <option>Test4</option>
-        </select>
-        ||
-      {dropdownElement}
-
-      </div>
-      <AdminWindow />
-      {/* <div className='border border-red-500 w-full relative'>
-        <ul className='flex flex-col px-60 relative border-4 border-green-500 max-w-fit'>{employees ? employees.map((e, x) => {
-          return (
-            <li className='border border-black text-center max-w-content py-5 px-10 m-2 float-left' key={x}>{e.userName}</li>
-            )
-          }) : ''}</ul>
-
-          <div>{selectedEmployeeId ? selectedEmployeeId.map(e => e.nickname) : ''}</div>
-      </div> */}
-      <EditSchedule />
+    <div className='h-screen flex flex-col relative'>
+      <TopNav loggedIn={true}/>
+      {/* <button onClick={() => fetchEmployeeData()}>GET</button> */}
+      <AppComponentWindow component={<AdminWindow />} />
+      
+      {/* <EditSchedule /> */}
       <BottomNav show={true} home={false} admin={false}/>
     </div>
   )
