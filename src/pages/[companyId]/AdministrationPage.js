@@ -7,9 +7,14 @@ import BottomNav from '../../components/navigationComponents/BottomNav'
 import AdminWindow from '../../components/adminComponents/AdminWindow';
 import AppComponentWindow from '../../components/appComponents/AppComponentWindow';
 import TopNav from '../../components/navigationComponents/TopNav';
+import useVisualMode from '../../hooks/useVisualMode';
 // import { getEmployeeScheduleById, getEmployeesByCompany } from '../../helperFunctions/apiHelpers';
 
+const SHOW_SELECTION = 'SHOW_SELECTION'
+const SCHEDULE_EDITOR = 'SCHEDULE_EDITOR'
+
 const admin = () => {
+  const { mode, transition, back } = useVisualMode(SHOW_SELECTION)
 
   const router = useRouter([]);
   const company = router.query.companyId
@@ -47,7 +52,14 @@ const admin = () => {
     <div className='h-screen flex flex-col relative'>
       <TopNav loggedIn={true}/>
       {/* <button onClick={() => fetchEmployeeData()}>GET</button> */}
-      <AppComponentWindow component={<AdminWindow />} />
+      {mode === SHOW_SELECTION && (
+        <AppComponentWindow component={<AdminWindow showSchedule={() => transition(SCHEDULE_EDITOR)} />} />
+      )}
+      {mode === SCHEDULE_EDITOR && (
+        <EditSchedule />
+      )
+
+      }
       
       {/* <EditSchedule /> */}
       <BottomNav show={true} home={false} admin={false}/>
