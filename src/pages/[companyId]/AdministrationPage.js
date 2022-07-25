@@ -51,12 +51,13 @@ const admin = () => {
   return (
     <div className='h-screen flex flex-col relative'>
       <TopNav loggedIn={true}/>
+      <button onClick={() => transition(SCHEDULE_EDITOR)}>showSchedule</button>
       {/* <button onClick={() => fetchEmployeeData()}>GET</button> */}
       {mode === SHOW_SELECTION && (
-        <AppComponentWindow component={<AdminWindow showSchedule={() => transition(SCHEDULE_EDITOR)} />} />
+        <AppComponentWindow component={<AdminWindow showSchedule={() => transition(SCHEDULE_EDITOR)}/>} />
       )}
       {mode === SCHEDULE_EDITOR && (
-        <EditSchedule />
+        <EditSchedule back={back}/>
       )
 
       }

@@ -9,7 +9,7 @@ const AdminWindow = (props) => {
       {/* row 1 */}
       <div className='h-auto w-full flex flex-1 gap-4  flex-grow ' >
         {/* box 1 */}
-        <AdminPageSelection icon={<FontAwesomeIcon icon={faClipboardList}/>} selectionName={'Update Schedules'} showSchedule={props.showSchedule}/>
+        <AdminPageSelection icon={<FontAwesomeIcon icon={faClipboardList}/>} selectionName={'Update Schedules'} showSchedule={props.showSchedule} back={props.back}/>
         {/* box 2 */}
         <AdminPageSelection icon={<FontAwesomeIcon icon={faCalendarPlus}/>} selectionName={'Add Task'}/>
       </div>

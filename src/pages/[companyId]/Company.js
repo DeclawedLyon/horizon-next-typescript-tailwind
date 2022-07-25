@@ -13,7 +13,7 @@ const Company = () => {
     // <div className='h-full min-h-screen border border-black relative flex flex-col justify-between'>
     <div className='relative border border-green-500 h-screen flex flex-col'>
       <TopNav loggedIn={true}/>
-      <AppComponentWindow component={adminComponent} />
+      {/* <AppComponentWindow component={adminComponent} /> */}
       
       {/* <Link as={'/'} href='/'>
         <button>Home</button>

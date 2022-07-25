@@ -1,6 +1,8 @@
 import React from 'react'
+import useVisualMode from '../../hooks/useVisualMode'
 
-const EditSchedule = () => {
+const EditSchedule = (props) => {
+  // const {mode, transition, back} = useVisualMode()
   return (
     <div className='border border-black h-full w-full '>
       <div>
@@ -12,6 +14,8 @@ const EditSchedule = () => {
         <option>Test3</option>
         <option>Test4</option>
       </select>
+      <div>Test words go here</div>
+      <button onClick={() => props.back()}>back</button>
     </div>
   )
 }
