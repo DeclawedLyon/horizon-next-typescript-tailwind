@@ -1,19 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import useVisualMode from '../../hooks/useVisualMode'
 
 const EditSchedule = (props) => {
   // const {mode, transition, back} = useVisualMode()
+  const [employeeOptions, setEmployeeOptions] = useState(['testphrase'])
+  console.log(props)
+  useEffect(() => {
+    console.log('triggered')
+    if (props.employees !== undefined) {
+      const employeeOptionElements = props.employees ?props.employees.map((e, x) => {
+        return (
+          <option key={`option-${x}`}>{e.userName}</option>
+        )
+      }) : ''
+      setEmployeeOptions(employeeOptionElements)
+    }
+  }, [props.employees])
   return (
     <div className='border border-black h-full w-full '>
-      <div>
-        test
+      <h1>Edit Schedules</h1>
+      <div className='w-full border border-black'>
+        <h2>Select Employee</h2>
+        <select placeholder='select employee'>
+          {employeeOptions}
+          {/* <option>Test1</option>
+          <option>Test2</option>
+          <option>Test3</option>
+          <option>Test4</option> */}
+        </select>
       </div>
-      <select placeholder='select employee'>
-        <option>Test1</option>
-        <option>Test2</option>
-        <option>Test3</option>
-        <option>Test4</option>
-      </select>
       <div>Test words go here</div>
       <button onClick={() => props.back()}>back</button>
     </div>

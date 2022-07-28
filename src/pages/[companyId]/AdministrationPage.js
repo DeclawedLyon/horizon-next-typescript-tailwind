@@ -53,14 +53,14 @@ const admin = () => {
       <TopNav loggedIn={true}/>
       <button onClick={() => transition(SCHEDULE_EDITOR)}>showSchedule</button>
       {/* <button onClick={() => fetchEmployeeData()}>GET</button> */}
-      {mode === SHOW_SELECTION && (
-        <AppComponentWindow component={<AdminWindow showSchedule={() => transition(SCHEDULE_EDITOR)}/>} />
-      )}
-      {mode === SCHEDULE_EDITOR && (
-        <EditSchedule back={back}/>
-      )
+      {/* {mode === SHOW_SELECTION && (
+        <AppComponentWindow component={<AdminWindow showSchedule={() => transition(SCHEDULE_EDITOR)} companyId={company}/>} />
+      )} */}
+      {/* {mode === SCHEDULE_EDITOR && ( */}
+        <EditSchedule back={back} companyId={company} employees={employees}/>
+      {/* ) */}
 
-      }
+      {/* } */}
       
       {/* <EditSchedule /> */}
       <BottomNav show={true} home={false} admin={false}/>
