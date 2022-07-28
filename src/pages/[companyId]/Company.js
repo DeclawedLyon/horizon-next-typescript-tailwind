@@ -6,6 +6,7 @@ import TopNav from '../../components/navigationComponents/TopNav'
 import MapWindow from '../../components/mapComponents/MapWindow'
 import admin from './AdministrationPage'
 import AdminWindow from '../../components/adminComponents/AdminWindow'
+import Calendar from '../../components/userInterfaceComponents/Calendar'
 const Company = () => {
   const adminComponent = <AdminWindow />
   const map = <MapWindow />
@@ -14,7 +15,7 @@ const Company = () => {
     <div className='relative border border-green-500 h-screen flex flex-col'>
       <TopNav loggedIn={true}/>
       {/* <AppComponentWindow component={adminComponent} /> */}
-      
+      <Calendar />
       {/* <Link as={'/'} href='/'>
         <button>Home</button>
       </Link> */}
