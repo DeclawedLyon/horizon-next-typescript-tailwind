@@ -16,12 +16,19 @@ const EditSchedule = (props) => {
       setEmployeeOptions(employeeOptionElements)
     }
   }, [props.employees])
+
+  const handleSelection = (e) => {
+    console.log(e)
+  }
   return (
-    <div className='border border-black h-full w-full '>
-      <h1>Edit Schedules</h1>
-      <div className='w-full border border-black'>
+    <div className='border border-black h-full w-full my-4'>
+      <div id='title' className='w-full text-center'>
+        <h1 className=' text-xl font-bold text-center'>Edit Schedules</h1>
+      </div>
+      <div className='w-full border border-black '>
         <h2>Select Employee</h2>
-        <select placeholder='select employee'>
+        <select onChange={handleSelection} placeholder='select employee'>
+          <option>Select</option>
           {employeeOptions}
           {/* <option>Test1</option>
           <option>Test2</option>
