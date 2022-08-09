@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 const Calendar = () => {
   const [months, setMonths] = useState([])
-
+ // calendar is being tested on Company page
   const monthList = {
     January: 31,
     February: 28,
@@ -29,6 +29,7 @@ const Calendar = () => {
     if (selection === 'Select') return
     console.log(e.target.value)
   }
+  // make sure to auto select the current month
   return (
     <div id='calendar-window'>
       <div id='date-selection'>
