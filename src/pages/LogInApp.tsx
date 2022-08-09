@@ -5,13 +5,14 @@ import TopNav from '../components/navigationComponents/TopNav'
 
 export interface LoginAppProps {
   loggedIn: boolean,
-  handleLogin: () => void
+  handleLogin: (userName: string, password: string) => void,
+  handleLogout: () => void
 }
 
-const LogInApp = ({loggedIn, handleLogin}: LoginAppProps) => {
+const LogInApp = ({loggedIn, handleLogin, handleLogout}: LoginAppProps) => {
   return (
     <div className="flex min-h-screen max-h-screen flex-col items-center justify-around">
-      <TopNav loggedIn={loggedIn} handleLogout={handleLogin}/>
+      <TopNav loggedIn={loggedIn} handleLogin={handleLogin} handleLogout={handleLogout}/>
       <Login />
       <BottomNav show={loggedIn} home={true} admin={false}/>
     </div>

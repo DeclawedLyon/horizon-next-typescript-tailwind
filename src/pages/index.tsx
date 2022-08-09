@@ -26,9 +26,10 @@ class Home extends React.Component<HomeProps, HomeState> {
     this.handleLogin = this.handleLogin.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
-  handleLogin() {
+  handleLogin(userName: string, password: string) {
     // add user verification. demo login button works for now.
     if(!this.state.loggedIn) this.setState({loggedIn: true})
+
   }
   handleLogout() {
     if (this.state.loggedIn) this.setState({loggedIn: false, userId: ''})
@@ -45,6 +46,7 @@ class Home extends React.Component<HomeProps, HomeState> {
           // main app if logged in
           this.state.loggedIn && <MainApp 
             loggedIn={this.state.loggedIn} 
+            handleLogin={this.handleLogin}
             handleLogout={this.handleLogout}
           />
         }
@@ -54,6 +56,7 @@ class Home extends React.Component<HomeProps, HomeState> {
           this.state.loggedIn || <LogInApp 
             loggedIn={this.state.loggedIn} 
             handleLogin={this.handleLogin}
+            handleLogout={this.handleLogout}
           />
         }
         </div>

@@ -3,10 +3,11 @@ import React from 'react'
 
 export interface TopNavProps {
   loggedIn: boolean,
+  handleLogin: (userName: string, password: string) => void,
   handleLogout: () => void
 }
 
-const TopNav = ({loggedIn, handleLogout}: TopNavProps) => {
+const TopNav = ({loggedIn, handleLogin, handleLogout}: TopNavProps) => {
   return (
     <div className='fixed top-0 flex flex-row space-between justify-between w-full px-5 py-2 bg-sky-500'>
       <Link as={'/'} href={'/'}>
